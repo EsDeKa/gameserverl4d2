@@ -1,2 +1,4 @@
 srv/
 content/
+resources/
+!resources/root/

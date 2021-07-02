@@ -75,11 +75,28 @@ then
     echo "${SOURCEMOD_VERSION_MAJOR}.${SOURCEMOD_VERSION_MINOR}-${SOURCEMOD_BUILD}" > left4dead2/addons/sm-version
 fi
 
+# Pull EsDeKa resources
+if [ "$getSourceMod" = "true" ];
+then
+    echo "Cloning resources:"
+    git clone https://github.com/EsDeKa/l4d2server-resources.git
+    cp -R l4d2server-resources/. .
+    rm -R --interactive=never l4d2server-resources/
+fi
+
+if [ -f "left4dead2/addons/sourcemod/plugins/nextmap.smx" ];
+then
+    echo "Disabling useless nextmap.smx"
+    mv left4dead2/addons/sourcemod/plugins/nextmap.smx left4dead2/addons/sourcemod/plugins/disabled/
+fi
+
+echo "Running steamcmd.sh:"
+
 # Run Server
 
 /home/steam/steamcmd/steamcmd.sh +login anonymous   \
         +force_install_dir ${SRCDS_SRV_DIR}         \
-        +app_update ${SRCDS_APP_ID} validate        \
+        +app_update ${SRCDS_APP_ID}                 \
         +quit
 ./srcds_run                                         \
     -game left4dead2                                      \

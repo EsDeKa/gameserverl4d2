@@ -1,5 +1,4 @@
 FROM lanopsdev/gameserver-steamcmd:latest
-MAINTAINER Thornton Phillis (dev@th0rn0.co.uk)
 
 # Env - Defaults
 
@@ -12,15 +11,17 @@ ENV SRCDS_APP_ID 222860
 
 # Env - SourceMod & MetaMod
 
-ENV SOURCEMOD_VERSION_MAJOR 1.10
+ENV SOURCEMOD_VERSION_MAJOR 1.11
 ENV SOURCEMOD_VERSION_MINOR 0
-ENV SOURCEMOD_BUILD 6502
-ENV METAMOD_VERSION_MAJOR 1.10
-ENV METAMOD_VERSION_MINOR 7
-ENV METAMOD_BUILD 968
+ENV SOURCEMOD_BUILD 6675
+ENV METAMOD_VERSION_MAJOR 1.12
+ENV METAMOD_VERSION_MINOR 0
+ENV METAMOD_BUILD 1147
 
 # Add Start Script
-
+USER root
+RUN apt-get update && apt-get upgrade -y && apt-get install -y git
+USER steam
 RUN mkdir -p ${SRCDS_SRV_DIR}
 RUN { \
         echo '@ShutdownOnFailedCommand 1'; \
@@ -48,4 +49,4 @@ EXPOSE 27020 27005 51840
 # Start Server
 
 ENTRYPOINT ["/home/steam/startServer.sh"]
-CMD ["-maxplayers 8 +sv_pure 1 +sv_region -1 +exec server.cfg +sv_lan 0 +map c1m1_hotel +ip 0.0.0.0"]
+CMD ["+map c7m2_barge +ip 0.0.0.0"]

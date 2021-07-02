@@ -1,6 +1,6 @@
 # L4D2 Docker Image
 
-L4D2 Dedicated Server with Metamod & Sourcemod
+L4D2 Dedicated Server with Metamod & Sourcemod + [my personal plugin selection](https://github.com/EsDeKa/l4d2server-resources)
 
 ## Prerequisites
 
@@ -9,11 +9,7 @@ You must create the mount directory and give the container full read and write p
 ## Usage
 
 ```
-docker run -it --name "L4D2" 						\
-    -v /path/to/local/mount:/home/steam/left4dead2 	\
-    -p 27015:27015 									\
-    -p 27015:27015/udp 								\
-    lanopsdev/gameserver-left4dead2
+docker run -it --name "esdekal4d2" -v $PWD:/home/steam/left4dead2 -p 27015:27015 -p 27015:27015/udp esdeka/gameserverl4d2
 ```
 
 You can also use the Entrypoint and CMD to customize configs and plugins like you would normally with SRCDS (Port must be changed via Env Variable);
@@ -23,7 +19,7 @@ docker run -it --name "L4D2" 						\
     -v /path/to/local/mount:/home/steam/left4dead2 	\
     -p 27015:27015 									\
     -p 27015:27015/udp 								\
-    lanopsdev/gameserver-left4dead2 				\
+    esdeka/gameserverl4d2            				\
 	-insecure                                       \
     +maxplayers ${SRCDS_MAXPLAYERS}                 \
     +sv_pure ${SRCDS_PURE}                          \
@@ -37,6 +33,3 @@ docker run -it --name "L4D2" 						\
 
 * SRCDS_PORT - Port Number for the server to run on (Default 27015)
 
-## TODO
-
-Sort out permissions with /tmp/dump

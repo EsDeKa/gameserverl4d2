@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+    gameserverl4d2:
+        build:
+            context: .
+        container_name: L4D2dev
+        volumes:
+            - ./resources:/home/steam/left4dead2
+        ports:
+            - 27015:27015
+            - 27015:27015/udp
+        image: esdeka/gameserverl4d2:latest
