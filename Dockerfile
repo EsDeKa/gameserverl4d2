@@ -8,6 +8,7 @@ ENV SRCDS_PORT 27015
 
 ENV SRCDS_SRV_DIR /home/steam/left4dead2
 ENV SRCDS_APP_ID 222860
+ENV COLLECTIONS 2787108777 2787147130
 
 # Env - SourceMod & MetaMod
 
@@ -20,7 +21,9 @@ ENV METAMOD_BUILD 1157
 
 # Add Start Script
 USER root
-RUN apt-get update && apt-get upgrade -y && apt-get install -y git
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y git python3
 USER steam
 RUN mkdir -p ${SRCDS_SRV_DIR}
 RUN { \

@@ -94,16 +94,24 @@ echo "Running steamcmd.sh:"
 
 # Run Server
 
-/home/steam/steamcmd/steamcmd.sh +login anonymous   \
-        +force_install_dir ${SRCDS_SRV_DIR}         \
-        +app_update ${SRCDS_APP_ID}                 \
-        +quit
-./srcds_run                                         \
-    -game left4dead2                                      \
-    -console                                        \
-    -usercon                                        \
-    -autoupdate                                     \
-    -steam_dir /home/steam/steamcmd                 \
-    -steamcmd_script /home/steam/left4dead2_update.txt    \
-    -port ${SRCDS_PORT}                             \
-    $@
+while true
+do 
+    /home/steam/steamcmd/steamcmd.sh +login anonymous   \
+            +force_install_dir ${SRCDS_SRV_DIR}         \
+            +app_update ${SRCDS_APP_ID}                 \
+            +quit
+
+    ~/left4dead2/left4dead2/addons/workshop/workshop.py \
+        -o ~/left4dead2/left4dead2/addons/workshop/     \
+        ${COLLECTIONS}
+        
+    ./srcds_run                                         \
+        -game left4dead2                                      \
+        -console                                        \
+        -usercon                                        \
+        # -autoupdate                                     \
+        -steam_dir /home/steam/steamcmd                 \
+        -steamcmd_script /home/steam/left4dead2_update.txt    \
+        -port ${SRCDS_PORT}                             \
+        $@
+done
