@@ -1,3 +1,5 @@
+[![Docker](https://github.com/EsDeKa/gameserverl4d2/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/EsDeKa/gameserverl4d2/actions/workflows/docker-publish.yml)
+
 # L4D2 Docker Image
 
 L4D2 Dedicated Server with Metamod & Sourcemod + [my personal plugin selection](https://github.com/EsDeKa/l4d2server-resources)
