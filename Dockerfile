@@ -19,9 +19,7 @@ ENV COLLECTIONS 2787108777 2787147130
 
 # Add dependencies
 USER root
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y git python3
+RUN apt-get update && apt-get install -y git python3
 
 # Add start scripts
 USER steam
