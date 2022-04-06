@@ -9,7 +9,7 @@ You must create the mount directory and give the container full read and write p
 ## Usage
 
 ```
-docker run -it --name "esdekal4d2" -v $PWD:/home/steam/left4dead2 -p 27015:27015 -p 27015:27015/udp esdeka/gameserverl4d2
+docker run -it --name "esdekal4d2" -v $PWD/content:/home/steam/left4dead2 -p 27035:27035 -p 27035:27035/udp --env SRCDS_PORT=27035 esdeka/gameserverl4d2
 ```
 
 You can also use the Entrypoint and CMD to customize configs and plugins like you would normally with SRCDS (Port must be changed via Env Variable);
