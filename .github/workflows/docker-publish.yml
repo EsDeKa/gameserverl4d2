@@ -92,10 +92,8 @@ jobs:
       #   # against the sigstore community Fulcio instance.
       #  run: cosign sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push.outputs.digest }}
 
-      - name: Dockerhub Readme
-        uses: ms-jpq/sync-dockerhub-readme@v1
+      - uses: meeDamian/sync-readme@v1.0.6
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN  }}
-          repository: esdeka/gameserverl4d2
-          readme: "./README.md"
+          pass: ${{ secrets.DOCKER_PASS }}
+          description: true
+          
