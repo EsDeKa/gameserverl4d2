@@ -31,7 +31,7 @@ ADD --chown=steam:steam resources/root/* /home/steam
 
 EXPOSE ${SRCDS_PORT}
 EXPOSE ${SRCDS_PORT}/udp
-EXPOSE 27020 27005 51840
+#EXPOSE 27020 27005 51840
 
 # Start Server
 
