@@ -7,10 +7,11 @@ ENV SRCDS_PORT 27015
 # Env - Server
 ENV SRCDS_SRV_DIR /home/steam/left4dead2
 ENV SRCDS_APP_ID 222860
+ENV SERVER_NAME SDK
 # Env - SourceMod & MetaMod
 ENV SOURCEMOD_VERSION_MAJOR 1.11
 ENV SOURCEMOD_VERSION_MINOR 0
-ENV SOURCEMOD_BUILD 6861
+ENV SOURCEMOD_BUILD 6876
 ENV METAMOD_VERSION_MAJOR 1.12
 ENV METAMOD_VERSION_MINOR 0
 ENV METAMOD_BUILD 1157
@@ -38,4 +39,4 @@ ENTRYPOINT ["/home/steam/startServer.sh"]
 CMD ["+map c7m2_barge +ip 0.0.0.0"]
 
 # Debugging:
-# docker run -it --name "esdekal4d2" -v $PWD/content:/home/steam/left4dead2 -p 27035:27035 -p 27035:27035/udp --env SRCDS_PORT=27035 --rm --entrypoint /bin/bash esdeka/gameserverl4d2 
+# docker run -it --name "esdekal4d2" -v $PWD/content:/home/steam/left4dead2 -p 27035:27035 -p 27035:27035/udp --env SRCDS_PORT=27035 --env SERVER_NAME="SDK_TEST_SERVER" --rm --entrypoint /bin/bash esdeka/gameserverl4d2 

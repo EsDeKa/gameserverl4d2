@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cd ${SRCDS_SRV_DIR}
 
@@ -90,6 +90,8 @@ then
     mv left4dead2/addons/sourcemod/plugins/nextmap.smx left4dead2/addons/sourcemod/plugins/disabled/
 fi
 
+# Configure server name in separate cfg file
+echo hostname \"${SERVER_NAME:-SDK}\" > left4dead2/cfg/private_env.cfg
 
 # Run Server
 
@@ -101,10 +103,12 @@ do
             +app_update ${SRCDS_APP_ID}                 \
             +quit
 
-    echo "-----------Syncing with workshop.py-----------"
-    python3 /home/steam/workshop.py                     \
-        -o ~/left4dead2/left4dead2/addons/workshop/     \
-        ${COLLECTIONS}
+    if [ -v COLLECTIONS ]; then
+        echo "-----------Syncing with workshop.py-----------"
+        python3 /home/steam/workshop.py                     \
+            -o ~/left4dead2/left4dead2/addons/workshop/     \
+            ${COLLECTIONS}
+    fi
         
     echo "-----------Starting srcds_run-----------"
     ./srcds_run                                         \
