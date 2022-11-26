@@ -36,7 +36,7 @@ EXPOSE ${SRCDS_PORT}/udp
 # Start Server
 
 ENTRYPOINT ["/home/steam/startServer.sh"]
-CMD ["+map c7m2_barge +ip 0.0.0.0"]
+CMD ["+map c7m2_barge +ip 0.0.0.0 +precache_all_survivors 1"]
 
 # Debugging:
 # docker run -it --name "esdekal4d2" -v $PWD/content:/home/steam/left4dead2 -p 27035:27035 -p 27035:27035/udp --env SRCDS_PORT=27035 --env SERVER_NAME="SDK_TEST_SERVER" --rm --entrypoint /bin/bash esdeka/gameserverl4d2 
