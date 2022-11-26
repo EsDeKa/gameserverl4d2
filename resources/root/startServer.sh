@@ -95,14 +95,16 @@ echo hostname \"${SERVER_NAME:-SDK}\" > left4dead2/cfg/private_env.cfg
 
 # Run Server
 
+echo "-----------Initial steamcmd update and validate -----------"
+/home/steam/steamcmd/steamcmd.sh +login anonymous   \
+        +force_install_dir ${SRCDS_SRV_DIR}         \
+        +app_update ${SRCDS_APP_ID}                 \
+        validate                                   \
+        +quit
+
+
 while true
 do 
-    echo "-----------Running steamcmd.sh-----------"
-    /home/steam/steamcmd/steamcmd.sh +login anonymous   \
-            +force_install_dir ${SRCDS_SRV_DIR}         \
-            +app_update ${SRCDS_APP_ID}                 \
-            +quit
-
     if [ -v COLLECTIONS ]; then
         echo "-----------Syncing with workshop.py-----------"
         python3 /home/steam/workshop.py                     \
@@ -119,5 +121,10 @@ do
         -steamcmd_script /home/steam/autoupdate.txt     \
         -port ${SRCDS_PORT}                             \
         $@
-    echo "-----------Server stopped, restarting-------------"
+
+    echo "-----------Server stopped, restarting steamcmd.sh-----------"
+    /home/steam/steamcmd/steamcmd.sh +login anonymous   \
+            +force_install_dir ${SRCDS_SRV_DIR}         \
+            +app_update ${SRCDS_APP_ID}                 \
+            +quit
 done
