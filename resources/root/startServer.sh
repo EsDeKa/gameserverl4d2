@@ -99,7 +99,7 @@ echo "-----------Initial steamcmd update and validate -----------"
 /home/steam/steamcmd/steamcmd.sh +login anonymous   \
         +force_install_dir ${SRCDS_SRV_DIR}         \
         +app_update ${SRCDS_APP_ID}                 \
-        validate                                   \
+        #validate                                   \
         +quit
 
 
