@@ -49,39 +49,25 @@ echo hostname \"${SERVER_NAME:-SDK}\" > left4dead2/cfg/private_env.cfg
 
 # Run Server
 
-if [ -f "dontrun" ]; then echo "DONTRUN"; exit; fi
-
-echo "-----------Initial steamcmd update and validate -----------"
+echo "-----------steamcmd update -----------"
 /home/steam/steamcmd/steamcmd.sh +login anonymous   \
         +force_install_dir ${SRCDS_SRV_DIR}         \
         +app_update ${SRCDS_APP_ID}                 \
         +quit
 
-
-while true
-do 
-    if [ -f "dontrun" ]; then echo "DONTRUN"; exit; fi
-
-    if [ -v COLLECTIONS ]; then
-        echo "-----------Syncing with workshop.py-----------"
-        python3 /home/steam/workshop.py                     \
-            -o ~/left4dead2/left4dead2/addons/workshop/     \
-            ${COLLECTIONS}
-    fi
+if [ -v COLLECTIONS ]; then
+    echo "-----------Syncing with workshop.py-----------"
+    python3 /home/steam/workshop.py                     \
+        -o ~/left4dead2/left4dead2/addons/workshop/     \
+        ${COLLECTIONS}
+fi
         
-    echo "-----------Starting srcds_run-----------"
-    ./srcds_run                                         \
-        -game left4dead2                                \
-        -console                                        \
-        -usercon                                        \
-        -steam_dir /home/steam/steamcmd                 \
-        -steamcmd_script /home/steam/autoupdate.txt     \
-        -port ${SRCDS_PORT}                             \
-        $@
-
-    echo "-----------Server stopped, restarting steamcmd.sh-----------"
-    /home/steam/steamcmd/steamcmd.sh +login anonymous   \
-            +force_install_dir ${SRCDS_SRV_DIR}         \
-            +app_update ${SRCDS_APP_ID}                 \
-            +quit
-done
+echo "-----------Starting srcds_run-----------"
+./srcds_run                                         \
+    -game left4dead2                                \
+    -console                                        \
+    -usercon                                        \
+    -steam_dir /home/steam/steamcmd                 \
+    -steamcmd_script /home/steam/autoupdate.txt     \
+    -port ${SRCDS_PORT}                             \
+    $@
