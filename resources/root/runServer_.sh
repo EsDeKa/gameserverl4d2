@@ -3,31 +3,31 @@
 cd ${SRCDS_SRV_DIR}
 
 # Check if MetaMod needs to be downloaded
-if [ ! -d "left4dead2/addons/metamod" ] || [ ! -f "left4dead2/addons/mm-version" ] || [ "${METAMOD_VERSION_MAJOR}.${METAMOD_VERSION_MINOR}-${METAMOD_BUILD}" != $(head -n 1 left4dead2/addons/mm-version) ]; then
+if [ ! -d "left4dead2/addons/metamod" ] || [ ! -f "mm-version" ] || [ "${METAMOD_VERSION_MAJOR}.${METAMOD_VERSION_MINOR}-${METAMOD_BUILD}" != $(head -n 1 mm-version) ]; then
     echo "Downloading MetaMod"
     curl -sSL https://mms.alliedmods.net/mmsdrop/$METAMOD_VERSION_MAJOR/mmsource-$METAMOD_VERSION_MAJOR.$METAMOD_VERSION_MINOR-git$METAMOD_BUILD-linux.tar.gz \
         -o /tmp/metamod.tar.gz
     mkdir /tmp/metamod
     tar -xzvf /tmp/metamod.tar.gz --directory /tmp/metamod
-    chmod +766 -R /tmp/metamod
+    chmod +777 -R /tmp/metamod
     cp -pR /tmp/metamod/* $SRCDS_SRV_DIR/left4dead2
     rm -R /tmp/metamod*
-    echo "${METAMOD_VERSION_MAJOR}.${METAMOD_VERSION_MINOR}-${METAMOD_BUILD}" > left4dead2/addons/mm-version
+    echo "${METAMOD_VERSION_MAJOR}.${METAMOD_VERSION_MINOR}-${METAMOD_BUILD}" > mm-version
 fi
 
 getSourceMod="false"
 # Check if SourceMod needs to be downloaded
-if [ ! -d "left4dead2/addons/sourcemod" ] || [ ! -f "left4dead2/addons/sm-version" ] || [ "${SOURCEMOD_VERSION_MAJOR}.${SOURCEMOD_VERSION_MINOR}-${SOURCEMOD_BUILD}" != $(head -n 1 left4dead2/addons/sm-version) ]; then
+if [ ! -d "left4dead2/addons/sourcemod" ] || [ ! -f "sm-version" ] || [ "${SOURCEMOD_VERSION_MAJOR}.${SOURCEMOD_VERSION_MINOR}-${SOURCEMOD_BUILD}" != $(head -n 1 sm-version) ]; then
     getSourceMod="true"
     echo "Downloading SourceMod"
     curl -sSL https://sm.alliedmods.net/smdrop/$SOURCEMOD_VERSION_MAJOR/sourcemod-$SOURCEMOD_VERSION_MAJOR.$SOURCEMOD_VERSION_MINOR-git$SOURCEMOD_BUILD-linux.tar.gz \
         -o /tmp/sourcemod.tar.gz
     mkdir /tmp/sourcemod
     tar -xzvf /tmp/sourcemod.tar.gz --directory /tmp/sourcemod
-    chmod +766 -R /tmp/sourcemod
+    chmod +777 -R /tmp/sourcemod
     cp -pR /tmp/sourcemod/* $SRCDS_SRV_DIR/left4dead2
     rm -R /tmp/sourcemod*
-    echo "${SOURCEMOD_VERSION_MAJOR}.${SOURCEMOD_VERSION_MINOR}-${SOURCEMOD_BUILD}" > left4dead2/addons/sm-version
+    echo "${SOURCEMOD_VERSION_MAJOR}.${SOURCEMOD_VERSION_MINOR}-${SOURCEMOD_BUILD}" > sm-version
 fi
 
 # Pull EsDeKa resources
